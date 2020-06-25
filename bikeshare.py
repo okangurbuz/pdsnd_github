@@ -7,17 +7,8 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'washington': 'washington.csv' }
 
 def get_filters():
-    """
-    Asks user to specify a city, month, and day to analyze.
-
-    Returns:
-        (str) city - name of the city to analyze
-        (str) month - name of the month to filter by, or "all" to apply no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply no day filter
-    """
 
     print('Hello! Let\'s explore some US bikeshare data!')
-
 
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
 
@@ -47,8 +38,6 @@ def get_filters():
 
     df['Trip Duration'] = df['Trip Duration'].astype(int)
     df['hour'] = df['Start Time'].astype(str)
-
-
 
     # TO DO: get user input for month (all, january, february, ... , june)
 
@@ -99,23 +88,10 @@ def get_filters():
             day= day_input
             day_name_chk = '1'
 
-
-
     print('-'*40)
     return city, month, day
 
-
 def load_data(city, month, day):
-    """
-    Loads data for the specified city and filters by month and day if applicable.
-
-    Args:
-        (str) city - name of the city to analyze
-        (str) month - name of the month to filter by, or "all" to apply no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply no day filter
-    Returns:
-        df - Pandas DataFrame containing city data filtered by month and day
-    """
 
     df = pd.read_csv(CITY_DATA[city])
 
@@ -128,25 +104,20 @@ def load_data(city, month, day):
     df['Trip Duration'] = df['Trip Duration'].astype(int)
     df['hour'] = df['Start Time'].astype(str)
 
-
     if month != "All":
         df = df[df['month'] == month]
 
     if day != "All":
         df = df[df['day_of_week'] == day]
-#
 
     return df
 
-
 def time_stats(df):
-    """Displays statistics on the most frequent times of travel."""
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
     # TO DO: display the most common month
-
 
     popular_month = df['month'].mode()[0]
 
@@ -168,16 +139,12 @@ def time_stats(df):
 
     popular_hour_count = df['hour'].value_counts()[0]
 
-
     print("Most common hour of day is " + str(popular_hour) + " and this hour bikers rent a bike " + str(popular_hour_count) + " times." )
-
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-
 def station_stats(df):
-    """Displays statistics on the most popular stations and trip."""
 
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
@@ -206,34 +173,26 @@ def station_stats(df):
 
     print("Most common route is " + popular_route + " and this route has used beeen " + str(popular_route_count) + " times." )
 
-
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-
 def trip_duration_stats(df):
-    """Displays statistics on the total and average trip duration."""
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
     # TO DO: display total travel time
 
-
     print('Total travel time: ' + str(df['Trip Duration'].sum()))
-
 
     # TO DO: display mean travel time
 
     print('Average travel time: ' + str(round(df['Trip Duration'].mean())))
 
-
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-
 def user_stats(df):
-    """Displays statistics on bikeshare users."""
 
     print('\nCalculating User Stats...\n')
     start_time = time.time()
@@ -247,7 +206,6 @@ def user_stats(df):
 
     print('\n')
 
-
     # TO DO: Display counts of gender
 
     if 'Gender' in df.columns:
@@ -260,8 +218,6 @@ def user_stats(df):
         print("No Gender column for this city.")
         print('\n')
 
-
-
     # TO DO: Display earliest, most recent, and most common year of birth
 
     if 'Birth Year' in df.columns:
@@ -272,9 +228,7 @@ def user_stats(df):
 
         print("Oldest biker's birth year is " + str(min_birth_year) + " and youngest biker's birth year is " + str(max_birth_year) + ".")
 
-
         common_birth_year = df['Birth Year'].mode()[0]
-
 
         df2 = df[df['Birth Year'] == common_birth_year]
 
