@@ -243,6 +243,23 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def see_raw():
+            show_raw = input('\nWould you like to see raw data sample? Enter yes or no. \n')
+
+            x = 0
+            y = 5
+
+            show_raw_chk ='2'
+
+            while show_raw_chk !='1':
+                if show_raw.lower() != 'yes':
+                    show_raw_chk ='1'
+                else:
+                    print(df.iloc[x:y,0:5])
+                    show_raw = input('\nWould you like to see more? Enter yes or no. \n')
+                    show_raw_chk ='0'
+                    x = x + 5
+                    y = y + 5
 
 def main():
     while True:
@@ -253,23 +270,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-
-        show_raw = input('\nWould you like to see raw data sample? Enter yes or no. \n')
-
-        x = 0
-        y = 5
-
-        show_raw_chk ='2'
-
-        while show_raw_chk !='1':
-            if show_raw.lower() != 'yes':
-                show_raw_chk ='1'
-            else:
-                print(df.iloc[x:y,0:5])
-                show_raw = input('\nWould you like to see more? Enter yes or no. \n')
-                show_raw_chk ='0'
-                x = x + 5
-                y = y + 5
+        see_raw(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
